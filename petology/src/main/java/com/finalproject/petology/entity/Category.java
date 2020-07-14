@@ -22,7 +22,7 @@ public class Category {
 
     private String categoryName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Product> products;
 
@@ -52,7 +52,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", categoryName=" + categoryName + "]";
+        return "Category [categoryName=" + categoryName + ", id=" + id + ", products=" + products + "]";
     }
 
 }

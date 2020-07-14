@@ -1,31 +1,16 @@
 package com.finalproject.petology.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.finalproject.petology.dao.CategoryRepo;
 import com.finalproject.petology.dao.ProductRepo;
-import com.finalproject.petology.entity.Category;
 import com.finalproject.petology.entity.Product;
 import com.finalproject.petology.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/products")
@@ -46,13 +30,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductRepo productRepo;
-
-    @Autowired
-    private CategoryRepo categoryRepo;
-
-    @GetMapping
+    @GetMapping("/all")
     public Iterable<Product> getAllProduct() {
         return productService.getAllProduct();
     }
@@ -88,48 +66,57 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
-    @GetMapping("/filter")
-    public Iterable<Product> filterProduct(@RequestParam String searchProduct) {
-        return productService.filterProduct(searchProduct);
+    @GetMapping
+    public Iterable<Product> getPaginationDataProduct(@RequestParam int pageSize, @RequestParam int page) {
+        return productService.getPaginationDataProduct(pageSize, page);
     }
 
-    @GetMapping("/sort/nameAsc")
-    public List<Product> sortProductByNameAsc() {
-        return productService.sortProductByNameAsc();
-    }
+    // @GetMapping("/filter")
+    // public Iterable<Product> filterProduct(@RequestParam String searchProduct) {
+    // return productService.filterProduct(searchProduct);
+    // }
 
-    @GetMapping("/sort/nameDesc")
-    public List<Product> sortProductByNameDesc() {
-        return productRepo.sortProductByNameDesc();
-    }
+    // @GetMapping("/sort/nameAsc")
+    // public List<Product> sortProductByNameAsc() {
+    // return productService.sortProductByNameAsc();
+    // }
 
-    @GetMapping("/sort/priceAsc")
-    public List<Product> sortProductByPriceAsc() {
-        return productRepo.sortProductByPriceAsc();
-    }
+    // @GetMapping("/sort/nameDesc")
+    // public List<Product> sortProductByNameDesc() {
+    // return productService.sortProductByNameDesc();
+    // }
 
-    @GetMapping("/sort/priceDesc")
-    public List<Product> sortProductByPriceDesc() {
-        return productRepo.sortProductByPriceDesc();
-    }
+    // @GetMapping("/sort/priceAsc")
+    // public List<Product> sortProductByPriceAsc() {
+    // return productService.sortProductByPriceAsc();
+    // }
 
-    @GetMapping("/sort/{categoryId}/nameAsc")
-    public List<Product> sortProductOfCategoryByNameAsc(@PathVariable int categoryId) {
-        return productService.sortProductOfCategoryByNameAsc(categoryId);
-    }
+    // @GetMapping("/sort/priceDesc")
+    // public List<Product> sortProductByPriceDesc() {
+    // return productService.sortProductByPriceDesc();
+    // }
 
-    @GetMapping("/sort/{categoryId}/nameDesc")
-    public List<Product> sortProductOfCategoryByNameDesc(@PathVariable int categoryId) {
-        return productRepo.sortProductOfCategoryByNameDesc(categoryId);
-    }
+    // @GetMapping("/sort/{categoryId}/nameAsc")
+    // public List<Product> sortProductOfCategoryByNameAsc(@PathVariable int
+    // categoryId) {
+    // return productService.sortProductOfCategoryByNameAsc(categoryId);
+    // }
 
-    @GetMapping("/sort/{categoryId}/priceAsc")
-    public List<Product> sortProductOfCategoryByPriceAsc(@PathVariable int categoryId) {
-        return productRepo.sortProductOfCategoryByPriceAsc(categoryId);
-    }
+    // @GetMapping("/sort/{categoryId}/nameDesc")
+    // public List<Product> sortProductOfCategoryByNameDesc(@PathVariable int
+    // categoryId) {
+    // return productService.sortProductOfCategoryByNameDesc(categoryId);
+    // }
 
-    @GetMapping("/sort/{categoryId}/priceDesc")
-    public List<Product> sortProductOfCategoryByPriceDesc(@PathVariable int categoryId) {
-        return productRepo.sortProductOfCategoryByPriceDesc(categoryId);
-    }
+    // @GetMapping("/sort/{categoryId}/priceAsc")
+    // public List<Product> sortProductOfCategoryByPriceAsc(@PathVariable int
+    // categoryId) {
+    // return productService.sortProductOfCategoryByPriceAsc(categoryId);
+    // }
+
+    // @GetMapping("/sort/{categoryId}/priceDesc")
+    // public List<Product> sortProductOfCategoryByPriceDesc(@PathVariable int
+    // categoryId) {
+    // return productService.sortProductOfCategoryByPriceDesc(categoryId);
+    // }
 }

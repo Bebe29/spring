@@ -3,6 +3,7 @@ package com.finalproject.petology.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finalproject.petology.dao.CategoryRepo;
 import com.finalproject.petology.entity.Category;
 import com.finalproject.petology.entity.Product;
@@ -51,12 +52,12 @@ public class CategoryController {
 
     @GetMapping("/{categoryId}/products")
     public List<Product> getProductsOfCategory(@PathVariable int categoryId) {
-        Category findCategory = categoryRepo.findById(categoryId).get();
-        return findCategory.getProducts();
+        return categoryService.getProductsOfCategory(categoryId);
     }
 
     @GetMapping("/{categoryId}")
     public Optional<Category> getCategoryById(@PathVariable int categoryId) {
-        return categoryRepo.findById(categoryId);
+        return categoryService.getCategoryById(categoryId);
     }
+
 }

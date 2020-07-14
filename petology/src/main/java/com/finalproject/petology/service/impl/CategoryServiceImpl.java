@@ -1,10 +1,14 @@
 package com.finalproject.petology.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import com.finalproject.petology.dao.CategoryRepo;
 // import com.finalproject.petology.dao.ProductRepo;
 import com.finalproject.petology.entity.Category;
+import com.finalproject.petology.entity.Product;
 import com.finalproject.petology.service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +59,18 @@ public class CategoryServiceImpl implements CategoryService {
     // findCategory.setProducts(null);
     // categoryRepo.deleteById(categoryId);
     // };
+
+    @Override
+    @Transactional
+    public List<Product> getProductsOfCategory(int categoryId) {
+        Category findCategory = categoryRepo.findById(categoryId).get();
+        return findCategory.getProducts();
+    }
+
+    @Override
+    @Transactional
+    public Optional<Category> getCategoryById(int categoryId) {
+        return categoryRepo.findById(categoryId);
+    }
+
 }

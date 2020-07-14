@@ -26,21 +26,23 @@ public interface ProductService {
 
     public Optional<Product> getProductById(int productId);
 
-    public Iterable<Product> filterProduct(String searchProduct);
+    public Iterable<Product> getPaginationDataProduct(int pageSize, int page);
 
-    public List<Product> sortProductByNameAsc();
+    // public Iterable<Product> filterProduct(String searchProduct);
 
-    public List<Product> sortProductByNameDesc();
+    // public List<Product> sortProductByNameAsc();
 
-    public List<Product> sortProductByPriceAsc();
+    // public List<Product> sortProductByNameDesc();
 
-    public List<Product> sortProductByPriceDesc();
+    // public List<Product> sortProductByPriceAsc();
 
-    public List<Product> sortProductOfCategoryByNameAsc(int categoryId);
+    // public List<Product> sortProductByPriceDesc();
 
-    public List<Product> sortProductOfCategoryByNameDesc(int categoryId);
+    // public List<Product> sortProductOfCategoryByNameAsc(int categoryId);
 
-    public List<Product> sortProductOfCategoryByPriceAsc(int categoryId);
+    // public List<Product> sortProductOfCategoryByNameDesc(int categoryId);
 
-    public List<Product> sortProductOfCategoryByPriceDesc(int categoryId);
+    // public List<Product> sortProductOfCategoryByPriceAsc(int categoryId);
+
+    // public List<Product> sortProductOfCategoryByPriceDesc(int categoryId);
 }

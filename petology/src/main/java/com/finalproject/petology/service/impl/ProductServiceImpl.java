@@ -145,55 +145,62 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Iterable<Product> filterProduct(String searchProduct) {
-        return productRepo.findProductByName(searchProduct);
+    public Iterable<Product> getPaginationDataProduct(int pageSize, int page) {
+        int offset = (page - 1) * pageSize;
+        return productRepo.getPaginationDataProduct(pageSize, offset);
     }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductByNameAsc() {
-        return productRepo.sortProductByNameAsc();
-    }
+    // @Override
+    // @Transactional
+    // public Iterable<Product> filterProduct(String searchProduct) {
+    // return productRepo.findProductByName(searchProduct);
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductByNameDesc() {
-        return productRepo.sortProductByNameDesc();
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductByNameAsc() {
+    // return productRepo.sortProductByNameAsc();
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductByPriceAsc() {
-        return productRepo.sortProductByPriceAsc();
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductByNameDesc() {
+    // return productRepo.sortProductByNameDesc();
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductByPriceDesc() {
-        return productRepo.sortProductByPriceDesc();
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductByPriceAsc() {
+    // return productRepo.sortProductByPriceAsc();
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductOfCategoryByNameAsc(int categoryId) {
-        return productRepo.sortProductOfCategoryByNameAsc(categoryId);
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductByPriceDesc() {
+    // return productRepo.sortProductByPriceDesc();
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductOfCategoryByNameDesc(int categoryId) {
-        return productRepo.sortProductOfCategoryByNameDesc(categoryId);
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductOfCategoryByNameAsc(int categoryId) {
+    // return productRepo.sortProductOfCategoryByNameAsc(categoryId);
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductOfCategoryByPriceAsc(int categoryId) {
-        return productRepo.sortProductOfCategoryByPriceAsc(categoryId);
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductOfCategoryByNameDesc(int categoryId) {
+    // return productRepo.sortProductOfCategoryByNameDesc(categoryId);
+    // }
 
-    @Override
-    @Transactional
-    public List<Product> sortProductOfCategoryByPriceDesc(int categoryId) {
-        return productRepo.sortProductOfCategoryByPriceDesc(categoryId);
-    }
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductOfCategoryByPriceAsc(int categoryId) {
+    // return productRepo.sortProductOfCategoryByPriceAsc(categoryId);
+    // }
+
+    // @Override
+    // @Transactional
+    // public List<Product> sortProductOfCategoryByPriceDesc(int categoryId) {
+    // return productRepo.sortProductOfCategoryByPriceDesc(categoryId);
+    // }
 }

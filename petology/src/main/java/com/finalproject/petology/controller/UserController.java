@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finalproject.petology.dao.UserProfileRepo;
-import com.finalproject.petology.dao.UserRepo;
 import com.finalproject.petology.entity.User;
 import com.finalproject.petology.entity.UserProfile;
 import com.finalproject.petology.service.UserService;
@@ -28,9 +27,6 @@ public class UserController {
 
 	@Autowired
 	private UserProfileRepo userProfileRepo;
-
-	@Autowired
-	private UserRepo userRepo;
 
 	@GetMapping
 	public Iterable<User> getUsers() {

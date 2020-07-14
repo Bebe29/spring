@@ -1,11 +1,16 @@
 package com.finalproject.petology.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,10 +26,15 @@ public class Product {
     private int stock;
     private String productDescription;
     private String image;
+    private String type;
 
     @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH })
+    @JoinTable(name = "package_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "package_id"))
+    private List<Package> packages;
 
     public int getId() {
         return id;
@@ -74,6 +84,14 @@ public class Product {
         this.image = image;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -82,9 +100,19 @@ public class Product {
         this.category = category;
     }
 
+    public List<Package> getPackages() {
+        return packages;
+    }
+
+    public void setPackages(List<Package> packages) {
+        this.packages = packages;
+    }
+
     @Override
     public String toString() {
-        return "Product [id=" + id + ", productName=" + productName + ", price=" + price + ", stock=" + stock
-                + ", productDescription=" + productDescription + ", image=" + image + ", category=" + category + "]";
+        return "Product [category=" + category + ", id=" + id + ", image=" + image + ", packages=" + packages
+                + ", price=" + price + ", productDescription=" + productDescription + ", productName=" + productName
+                + ", stock=" + stock + ", type=" + type + "]";
     }
+
 }

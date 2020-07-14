@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
-
     @Query(value = "SELECT * FROM products WHERE product_name LIKE %:productName%", nativeQuery = true)
     public Iterable<Product> findProductByName(@Param("productName") String searchProduct);
 
@@ -36,4 +35,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
     @Query(value = "SELECT * FROM products WHERE category_id = :categoryId ORDER BY price DESC", nativeQuery = true)
     public List<Product> sortProductOfCategoryByPriceDesc(@Param("categoryId") int categoryId);
+
+    @Query(value = "SELECT * FROM products LIMIT :pageSize OFFSET :offset", nativeQuery = true)
+    public Iterable<Product> getPaginationDataProduct(@Param("pageSize") int pageSize, @Param("offset") int offset);
 }
